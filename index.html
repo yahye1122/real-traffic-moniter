@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Traffic Monitor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🚦 Real-Time Traffic Monitor</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-section="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-section="services">Services</a></li>
+                    <li><a href="#" class="nav-link" data-section="help">Help</a></li>
+                    <li><a href="#" class="nav-link" data-section="about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <h2>Current Traffic Conditions</h2>
+            <div class="region-selector">
+                <label for="region-select">Select Region:</label>
+                <select id="region-select">
+                    <option value="downtown">Downtown</option>
+                    <option value="highway">Highway 1</option>
+                    <option value="airport">Airport Road</option>
+                    <option value="suburbs">Northern Suburbs</option>
+                    <option value="industrial">Industrial Zone</option>
+                </select>
+            </div>
+            
+            <div id="traffic-display" class="traffic-card">
+                <div class="traffic-header">
+                    <h3>Downtown Traffic Overview</h3>
+                    <div class="last-updated">Last updated: <span id="update-time">12:34 PM</span></div>
+                </div>
+                <div class="traffic-metrics">
+                    <div class="metric-item congestion-high">
+                        <div class="metric-label">Congestion Level</div>
+                        <div class="metric-value">High</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Average Speed</div>
+                        <div class="metric-value">18 mph</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Active Incidents</div>
+                        <div class="metric-value">3</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Estimated Delay</div>
+                        <div class="metric-value">22 min</div>
+                    </div>
+                </div>
+                
+                <div class="traffic-map">
+                    <div class="map-container">
+                        <div class="road downtown-road1 congestion-high"></div>
+                        <div class="road downtown-road2 congestion-medium"></div>
+                        <div class="road downtown-road3 congestion-low"></div>
+                        <div class="road downtown-road4 congestion-high"></div>
+                        <div class="incident incident1">⚠️</div>
+                        <div class="incident incident2">⚠️</div>
+                        <div class="incident incident3">⚠️</div>
+                    </div>
+                </div>
+                
+                <div class="traffic-details">
+                    <h4>Active Incidents</h4>
+                    <ul id="incidents-list">
+                        <li>Multi-vehicle accident on Main St & 5th Ave - expect 15 min delay</li>
+                        <li>Road construction on Elm Street - lane closure until 5 PM</li>
+                        <li>Disabled vehicle on Oak Bridge - right lane blocked</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="traffic-legend">
+                <div class="legend-item congestion-low"><span class="legend-color"></span>Light Traffic</div>
+                <div class="legend-item congestion-medium"><span class="legend-color"></span>Moderate Traffic</div>
+                <div class="legend-item congestion-high"><span class="legend-color"></span>Heavy Traffic</div>
+                <div class="legend-item"><span class="legend-incident">⚠️</span>Incident</div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <h2>Route Planning Service</h2>
+            <div class="route-planner">
+                <form id="route-form">
+                    <div class="form-group">
+                        <label for="start-location">Starting Point:</label>
+                        <input type="text" id="start-location" placeholder="Enter starting location" required>
+                        <span class="error-message" id="start-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="end-location">Destination:</label>
+                        <input type="text" id="end-location" placeholder="Enter destination" required>
+                        <span class="error-message" id="end-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="departure-time">Departure Time:</label>
+                        <input type="time" id="departure-time" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Plan My Route</button>
+                </form>
+                
+                <div id="route-results" class="route-results hidden">
+                    <h3>Route Options</h3>
+                    <div class="route-option primary-route">
+                        <div class="route-header">
+                            <h4>Primary Route <span class="route-time">28 min</span></h4>
+                        </div>
+                        <div class="route-path">Downtown → Central Ave → Highway 1 → Airport Road</div>
+                        <div class="route-details">
+                            <div class="detail-item">Distance: 12.4 miles</div>
+                            <div class="detail-item congestion-high">Heavy traffic on Central Ave</div>
+                            <div class="detail-item">Toll: $2.50</div>
+                        </div>
+                        <button class="btn-save" data-route="primary">Save Route</button>
+                    </div>
+                    
+                    <div class="route-option alternate-route">
+                        <div class="route-header">
+                            <h4>Alternate Route <span class="route-time">35 min</span></h4>
+                        </div>
+                        <div class="route-path">Downtown → River Rd → North Blvd → Airport Road</div>
+                        <div class="route-details">
+                            <div class="detail-item">Distance: 14.2 miles</div>
+                            <div class="detail-item congestion-medium">Moderate traffic on North Blvd</div>
+                            <div class="detail-item">No tolls</div>
+                        </div>
+                        <button class="btn-save" data-route="alternate">Save Route</button>
+                    </div>
+                    
+                    <div class="route-option alternate-route">
+                        <div class="route-header">
+                            <h4>Eco Route <span class="route-time">42 min</span></h4>
+                        </div>
+                        <div class="route-path">Downtown → Park Ave → Scenic Drive → Airport Road</div>
+                        <div class="route-details">
+                            <div class="detail-item">Distance: 16.8 miles</div>
+                            <div class="detail-item congestion-low">Light traffic throughout</div>
+                            <div class="detail-item">Most fuel efficient</div>
+                        </div>
+                        <button class="btn-save" data-route="eco">Save Route</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="saved-routes">
+                <h3>Saved Routes</h3>
+                <div id="saved-routes-container">
+                    <!-- Saved routes will be dynamically inserted here -->
+                    <div class="no-routes">No saved routes yet. Plan a route and click "Save Route" to store it here.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Help Section -->
+        <section id="help" class="section">
+            <h2>Help & Support</h2>
+            <div class="help-content">
+                <div class="help-section">
+                    <h3>How to Use This Service</h3>
+                    <ol>
+                        <li>Select your region from the dropdown on the Home page to view current traffic conditions</li>
+                        <li>Use the Route Planner in the Services section to find the best path to your destination</li>
+                        <li>Save frequently used routes for quick access later</li>
+                        <li>Check the traffic map for visual representation of congestion and incidents</li>
+                        <li>Review alternate route suggestions to avoid heavy traffic areas</li>
+                    </ol>
+                </div>
+                
+                <div class="help-section">
+                    <h3>Traffic Condition Indicators</h3>
+                    <ul class="condition-list">
+                        <li><span class="condition-icon congestion-low"></span> <strong>Light Traffic:</strong> Flowing freely, minimal delays</li>
+                        <li><span class="condition-icon congestion-medium"></span> <strong>Moderate Traffic:</strong> Some slowdowns, expect minor delays</li>
+                        <li><span class="condition-icon congestion-high"></span> <strong>Heavy Traffic:</strong> Significant congestion, major delays likely</li>
+                        <li><span class="condition-icon incident">⚠️</span> <strong>Incident:</strong> Accident, construction, or other obstruction</li>
+                    </ul>
+                </div>
+                
+                <div class="help-section contact-form">
+                    <h3>Contact Support</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name">Your Name:</label>
+                            <input type="text" id="contact-name" required>
+                            <span class="error-message" id="contact-name-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email Address:</label>
+                            <input type="email" id="contact-email" required>
+                            <span class="error-message" id="contact-email-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message:</label>
+                            <textarea id="contact-message" rows="4" required></textarea>
+                            <span class="error-message" id="contact-message-error"></span>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                    <div id="contact-success" class="success-message hidden">Thank you! Your message has been sent successfully.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2>About This Project</h2>
+            <div class="about-content">
+                <div class="project-details">
+                    <h3>Project Information</h3>
+                    <div class="detail-row">
+                        <span class="detail-label">Project Owner:</span>
+                        <span class="detail-value">Yahye Abdulahi Ahmed</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Student ID:</span>
+                        <span class="detail-value">C5240018</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Phone Number:</span>
+                        <span class="detail-value">061287128</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Class Name:</span>
+                        <span class="detail-value">CM241</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Project Title:</span>
+                        <span class="detail-value">Real-Time Traffic Monitor</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Completion Date:</span>
+                        <span class="detail-value">February 2, 2026</span>
+                    </div>
+                </div>
+                
+                <div class="project-description">
+                    <h3>Project Description</h3>
+                    <p>This Real-Time Traffic Monitor is a comprehensive front-end application designed to provide users with up-to-date traffic information, route planning capabilities, and traffic condition visualizations. The application simulates real-time traffic data for different regions of a city and offers intelligent route suggestions based on current traffic conditions.</p>
+                    <p>Key features include:</p>
+                    <ul>
+                        <li>Live traffic condition monitoring with visual indicators</li>
+                        <li>Intelligent route planning with multiple options</li>
+                        <li>Alternate route suggestions to avoid congestion</li>
+                        <li>Travel time estimation based on current traffic</li>
+                        <li>CRUD operations for saving and managing favorite routes</li>
+                        <li>Responsive design for all device sizes</li>
+                        <li>Form validation and user feedback systems</li>
+                    </ul>
+                    <p>This project demonstrates proficiency in HTML, CSS, and JavaScript, with emphasis on DOM manipulation, event handling, responsive design, and client-side data management.</p>
+                </div>
+                
+                <div class="tech-stack">
+                    <h3>Technologies Used</h3>
+                    <div class="tech-icons">
+                        <div class="tech-icon html">HTML5</div>
+                        <div class="tech-icon css">CSS3</div>
+                        <div class="tech-icon js">JavaScript</div>
+                        <div class="tech-icon responsive">Responsive Design</div>
+                        <div class="tech-icon dom">DOM Manipulation</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Real-Time Traffic Monitor. All rights reserved.</p>
+            <p>Project by Yahye Abdulahi Ahmed (ID: C5240018) for CM241 Class</p>
+            <div class="footer-links">
+                <a href="#" class="nav-link" data-section="home">Home</a>
+                <a href="#" class="nav-link" data-section="services">Services</a>
+                <a href="#" class="nav-link" data-section="help">Help</a>
+                <a href="#" class="nav-link" data-section="about">About</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
